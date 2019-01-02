@@ -99,8 +99,11 @@ class WxController extends Controller
 
             $RX_TYPE = trim($postObj->MsgType);
             //   $this->test($RX_TYPE) ;
+
+            Log::info("receive text type : ".$RX_TYPE);
             switch ($RX_TYPE) {
                 case "text":
+
                     $resultStr = $this->receive($postObj);
                     break;
                 case "image":
@@ -125,8 +128,32 @@ class WxController extends Controller
 
     }
 
-    protected function receive($data){
-        return $data;
+    protected function receive($data, $type = 'text')
+    {
+        $ToUserName = $data->ToUserName ;
+        $FromUserName = $data->FromUserName ;
+        $CreateTime = $data->ToUserName ;
+        $text = 'responsd data laravel php';
+        $Content = $data->Content ;
+        $xml = <<<XML
+        <xml>
+        <ToUserName><![CDATA[$ToUserName]]></ToUserName>
+        <FromUserName><![CDATA[$FromUserName]]></FromUserName>
+        <CreateTime>$CreateTime</CreateTime>
+        <MsgType><![CDATA[$text]]></MsgType>
+        <Content><![CDATA[$Content]]></Content>
+        </xml>
+XML;
+
+        switch ($type) {
+            case 'text':
+
+                break;
+            default:
+
+                break;
+        }
+        return $xml;
     }
 
 }
