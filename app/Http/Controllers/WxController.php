@@ -88,7 +88,7 @@ class WxController extends Controller
     public function postMsg(Request $request)
     {
 
-        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        $postStr = $request->getContent();
         if (!empty($postStr)) {
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 
