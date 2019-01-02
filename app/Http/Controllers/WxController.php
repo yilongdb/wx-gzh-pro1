@@ -31,8 +31,9 @@ class WxController extends Controller
 
     public function postMsg(Request $request){
 
-        Log:info('wx post msg ========================');
-        Log::info(implode($request->all()));
+        Log:info('wx post msg ======================== post msg');
+        Log::info(implode($request -> request -> all()));
+//        Log::info($request->all());
         return $request->all();
     }
 }
