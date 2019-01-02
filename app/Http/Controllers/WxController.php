@@ -120,6 +120,7 @@ class WxController extends Controller
                     break;
             }
             echo $resultStr;
+            exit(0);
         } else {
             return "";
 //            exit;
