@@ -89,6 +89,8 @@ class WxController extends Controller
     {
 
         $postStr = $request->getContent();
+        Log::info("post msg ========== postStr");
+        Log::info($postStr);
         if (!empty($postStr)) {
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 
