@@ -8,16 +8,16 @@ use Illuminate\Support\Facades\Log;
 
 class WxController extends Controller
 {
-    protected function verifyToken(Request $request){
+    protected function verifyToken(Request $request)
+    {
         $wxVerifyToken = config('wx.verifyToken');
         $signature = $request->input("signature");
-        $timestamp  = $request->input("timestamp");
+        $timestamp = $request->input("timestamp");
         $nonce = $request->input("nonce");
         $echostr = $request->input("echostr");
-        $list = [$wxVerifyToken , $timestamp , $nonce];
+        $list = [$wxVerifyToken, $timestamp, $nonce];
         sort($list);
         $hash = sha1(implode($list));
-
 
 
         return $hash == $signature;
@@ -28,13 +28,14 @@ class WxController extends Controller
     {
         $echostr = $request->input("echostr");
 
-        Log:info('wx verify msg ========================');
+        Log:
+        info('wx verify msg ========================');
         Log::info(implode($request->all()));
 
-        if($this->verifyToken($request)){
+        if ($this->verifyToken($request)) {
             return $echostr;
-        }else{
-            return response()->json(['message' => 'token verify failure'] , Response::HTTP_BAD_REQUEST);
+        } else {
+            return response()->json(['message' => 'token verify failure'], Response::HTTP_BAD_REQUEST);
         }
 
 
@@ -57,25 +58,73 @@ class WxController extends Controller
 //        }
     }
 
-    public function postMsg(Request $request){
+    public function postMsg1(Request $request)
+    {
 
-        Log:info('wx post msg ======================== post msg');
-        Log::info(implode($request -> all()));
+        Log::info('wx post msg ======================== post msg');
+        Log::info(implode($request->all()));
 //        Log::info($request->all());
 
         $echostr = $request->input("echostr");
 
-        if(isset($echostr)){
-            if($this->verifyToken($request)){
+        $xml = simplexml_load_string($request->all());
+
+        $json = json_encode($xml);
+
+        if (isset($echostr)) {
+            if ($this->verifyToken($request)) {
                 return $echostr;
-            }else{
-                return response()->json(['message' => 'token verify failure'] , Response::HTTP_BAD_REQUEST);
+            } else {
+                return response()->json(['message' => 'token verify failure'], Response::HTTP_BAD_REQUEST);
             }
-        }else{
+        } else {
             return $request->all();
         }
 
 
+    }
+
+
+    public function postMsg(Request $request)
+    {
+
+        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        if (!empty($postStr)) {
+            $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+
+            Log::info("post msg ========== post obj");
+            Log::info($postObj);
+
+            $RX_TYPE = trim($postObj->MsgType);
+            //   $this->test($RX_TYPE) ;
+            switch ($RX_TYPE) {
+                case "text":
+                    $resultStr = $this->receive($postObj);
+                    break;
+                case "image":
+                    $resultStr = $this->receive($postObj);
+                    break;
+                case "voice":
+                    $resultStr = $this->receive($postObj);
+                    break;
+                case "event":
+                    $resultStr = $this->receive($postObj);
+                    break;
+                default:
+                    $resultStr = "unknow msg type: " . $RX_TYPE;
+                    break;
+            }
+            return $resultStr;
+        } else {
+            return "";
+//            exit;
+        }
+
 
     }
+
+    protected function receive($data){
+        return $data;
+    }
+
 }
