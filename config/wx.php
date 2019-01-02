@@ -6,5 +6,5 @@
  * Time: 上午 11:42
  */
 return [
-    'verifyToken' => 'wx verify token'
+    'verifyToken' => 'wxverifytoken'
 ];
