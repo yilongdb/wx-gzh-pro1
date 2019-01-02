@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class WxController extends Controller
 {
-    public function tokenVerify(Request $request)
-    {
+    protected function verifyToken(Request $request){
         $wxVerifyToken = config('wx.verifyToken');
         $signature = $request->input("signature");
         $timestamp  = $request->input("timestamp");
@@ -19,21 +18,64 @@ class WxController extends Controller
         sort($list);
         $hash = sha1(implode($list));
 
+
+
+        return $hash == $signature;
+
+    }
+
+    public function tokenVerify(Request $request)
+    {
+        $echostr = $request->input("echostr");
+
         Log:info('wx verify msg ========================');
         Log::info(implode($request->all()));
 
-        if($hash == $signature){
+        if($this->verifyToken($request)){
             return $echostr;
         }else{
             return response()->json(['message' => 'token verify failure'] , Response::HTTP_BAD_REQUEST);
         }
+
+
+//        $wxVerifyToken = config('wx.verifyToken');
+//        $signature = $request->input("signature");
+//        $timestamp  = $request->input("timestamp");
+//        $nonce = $request->input("nonce");
+//        $echostr = $request->input("echostr");
+//        $list = [$wxVerifyToken , $timestamp , $nonce];
+//        sort($list);
+//        $hash = sha1(implode($list));
+//
+//        Log:info('wx verify msg ========================');
+//        Log::info(implode($request->all()));
+//
+//        if($hash == $signature){
+//            return $echostr;
+//        }else{
+//            return response()->json(['message' => 'token verify failure'] , Response::HTTP_BAD_REQUEST);
+//        }
     }
 
     public function postMsg(Request $request){
 
         Log:info('wx post msg ======================== post msg');
-        Log::info(implode($request -> request -> all()));
+        Log::info(implode($request -> all()));
 //        Log::info($request->all());
-        return $request->all();
+
+        $echostr = $request->input("echostr");
+
+        if(isset($echostr)){
+            if($this->verifyToken($request)){
+                return $echostr;
+            }else{
+                return response()->json(['message' => 'token verify failure'] , Response::HTTP_BAD_REQUEST);
+            }
+        }else{
+            return $request->all();
+        }
+
+
+
     }
 }
