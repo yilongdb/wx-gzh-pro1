@@ -145,6 +145,7 @@ class WxController extends Controller
         </xml>
 XML;
 
+        Log::info($xml);
         switch ($type) {
             case 'text':
 
