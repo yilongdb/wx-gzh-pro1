@@ -119,7 +119,7 @@ class WxController extends Controller
                     $resultStr = "unknow msg type: " . $RX_TYPE;
                     break;
             }
-            return $resultStr;
+            echo $resultStr;
         } else {
             return "";
 //            exit;
