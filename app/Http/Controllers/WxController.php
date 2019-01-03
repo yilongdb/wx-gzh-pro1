@@ -119,8 +119,9 @@ class WxController extends Controller
                     $resultStr = "unknow msg type: " . $RX_TYPE;
                     break;
             }
-//            echo $resultStr;
-//            exit(0);
+            Log::info("string coding index : {$resultStr[0]} , {$resultStr[1]} , {$resultStr[2]} , {$resultStr[3]} , {$resultStr[4]} , ");
+            echo $resultStr;
+            exit(0);
 
             Log::info("string coding index : {$resultStr[0]} , {$resultStr[1]} , {$resultStr[2]} , {$resultStr[3]} , {$resultStr[4]} , ");
             return response($resultStr)->header('Content-Type' , 'text/xml');
