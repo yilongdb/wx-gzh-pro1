@@ -92,7 +92,7 @@ XML;
         }
 
 
-   return response($res)->header('Content-Type' , 'text/xml');
+   return response($res)->header('Content-Type' , 'application/xml');
 
 
     }
