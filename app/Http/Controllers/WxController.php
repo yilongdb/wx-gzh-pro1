@@ -137,13 +137,7 @@ class WxController extends Controller
         $text = 'responsd data laravel php';
         $Content = $data->Content ;
         $xml = <<<XML
-<xml>
-<ToUserName><![CDATA[$ToUserName]]></ToUserName>
-<FromUserName><![CDATA[$FromUserName]]></FromUserName>
-<CreateTime>$CreateTime</CreateTime>
-<MsgType><![CDATA[$text]]></MsgType>
-<Content><![CDATA[$Content]]></Content>
-</xml>
+<xml> <ToUserName>< ![CDATA[$ToUserName] ]></ToUserName> <FromUserName>< ![CDATA[$FromUserName] ]></FromUserName> <CreateTime>$CreateTime</CreateTime> <MsgType>< ![CDATA[$text] ]></MsgType> <Content>< ![CDATA[$Content] ]></Content> </xml>
 XML;
 
         Log::info($xml);
