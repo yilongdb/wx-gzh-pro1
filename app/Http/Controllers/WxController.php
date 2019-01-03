@@ -147,15 +147,16 @@ XML;
 
         $imgXml = "<xml> <ToUserName>< ![CDATA[%s] ]></ToUserName> <FromUserName>< ![CDATA[%s] ]></FromUserName> <CreateTime>%s</CreateTime> <MsgType>< ![CDATA[%s] ]></MsgType> <PicUrl>< ![CDATA[%s] ]></PicUrl> <MediaId>< ![CDATA[%s] ]></MediaId> <MsgId>%s</MsgId> </xml>";
 
-        Log::info($xml);
+        $len = strlen($xml);
+        Log::info($xml."string len : {$len}");
         switch ($type) {
             case 'text':
 
                 break;
             case 'image':
                 $imgXml = sprintf($imgXml,$ToUserName,$FromUserName,$CreateTime,$msgType,$PicUrl ,$MediaId, $MsgId);
-
-                Log::info("img : {$imgXml}");
+                $len1 = strlen($imgXml);
+                Log::info("img : {$imgXml}"."image len : {$len1}");
                 return $imgXml;
             default:
             $xml = 'success';
