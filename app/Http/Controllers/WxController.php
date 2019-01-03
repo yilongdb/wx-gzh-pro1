@@ -152,7 +152,8 @@ XML;
 
                 break;
             default:
-
+            $xml = 'success';
+                Log::info('return success default');
                 break;
         }
         return $xml;
