@@ -138,15 +138,25 @@ class WxController extends Controller
         $text = 'responsd data laravel php';
         $msgType = $data->MsgType ;
         $Content = $data->Content ;
+        $PicUrl = $data->PicUrl ;
+        $MediaId = $data->MediaId ;
+        $MsgId = $data->MsgId ;
         $xml = <<<XML
 <xml><ToUserName><![CDATA[$ToUserName]]></ToUserName><FromUserName><![CDATA[$FromUserName]]></FromUserName><CreateTime>$CreateTime</CreateTime><MsgType><![CDATA[$msgType]]></MsgType><Content><![CDATA[$Content]]></Content></xml>
 XML;
+
+        $imgXml = "<xml> <ToUserName>< ![CDATA[%s] ]></ToUserName> <FromUserName>< ![CDATA[%s] ]></FromUserName> <CreateTime>%s</CreateTime> <MsgType>< ![CDATA[%s] ]></MsgType> <PicUrl>< ![CDATA[%s] ]></PicUrl> <MediaId>< ![CDATA[%s] ]></MediaId> <MsgId>%s</MsgId> </xml>";
 
         Log::info($xml);
         switch ($type) {
             case 'text':
 
                 break;
+            case 'image':
+                $imgXml = sprintf($imgXml,$ToUserName,$FromUserName,$CreateTime,$msgType,$PicUrl ,$MediaId, $MsgId);
+
+                Log::info("img : {$imgXml}");
+                return $imgXml;
             default:
             $xml = 'success';
                 Log::info('return success default');
