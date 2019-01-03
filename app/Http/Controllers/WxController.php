@@ -102,6 +102,7 @@ XML;
     {
 
         $postStr = $request->getContent();
+        $resultStr = '';
         Log::info("post msg ========== postStr");
         Log::info($postStr);
         if (!empty($postStr)) {
@@ -161,7 +162,7 @@ XML;
 <xml><ToUserName><![CDATA[$ToUserName]]></ToUserName><FromUserName><![CDATA[$FromUserName]]></FromUserName><CreateTime>$CreateTime</CreateTime><MsgType><![CDATA[$msgType]]></MsgType><Content><![CDATA[$Content]]></Content></xml>
 XML;
 
-        $imgXml = "<xml> <ToUserName>< ![CDATA[%s] ]></ToUserName> <FromUserName>< ![CDATA[%s] ]></FromUserName> <CreateTime>%s</CreateTime> <MsgType>< ![CDATA[%s] ]></MsgType> <PicUrl>< ![CDATA[%s] ]></PicUrl> <MediaId>< ![CDATA[%s] ]></MediaId> <MsgId>%s</MsgId> </xml>";
+        $imgXml ="<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><PicUrl><![CDATA[%s]]></PicUrl><MediaId><![CDATA[%s]]></MediaId><MsgId>%s</MsgId></xml>";
 
         $len = strlen($xml);
         Log::info($xml."string len : {$len}");
