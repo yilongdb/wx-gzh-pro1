@@ -104,16 +104,16 @@ class WxController extends Controller
             switch ($RX_TYPE) {
                 case "text":
 
-                    $resultStr = $this->receive($postObj);
+                    $resultStr = $this->receive($postObj , $RX_TYPE);
                     break;
                 case "image":
-                    $resultStr = $this->receive($postObj);
+                    $resultStr = $this->receive($postObj , $RX_TYPE);
                     break;
                 case "voice":
-                    $resultStr = $this->receive($postObj);
+                    $resultStr = $this->receive($postObj , $RX_TYPE);
                     break;
                 case "event":
-                    $resultStr = $this->receive($postObj);
+                    $resultStr = $this->receive($postObj , $RX_TYPE);
                     break;
                 default:
                     $resultStr = "unknow msg type: " . $RX_TYPE;
