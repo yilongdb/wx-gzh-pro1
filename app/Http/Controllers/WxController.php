@@ -99,9 +99,26 @@ XML;
     }
 
 
+    public function token(Request $request){
+        $token = \Redis::get('access_token');
+        $ex = \Redis::get('expires_in');
+
+        if($ex){
+            Log::info("token : {$token} , ex : {$ex}");
+        }
+
+
+        return response(['token' => $token , 'ex' => $ex]);
+    }
     public function postMsg(Request $request)
     {
 
+        $token = \Redis::get('access_token');
+        $ex = \Redis::get('expires_in');
+
+        if($ex){
+            Log::info("token : {$token} , ex : {$ex}");
+        }
         $postStr = $request->getContent();
         $resultStr = '';
         Log::info("post msg ========== postStr");
