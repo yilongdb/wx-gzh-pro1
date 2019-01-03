@@ -139,11 +139,7 @@ class WxController extends Controller
         $msgType = $data->MsgType ;
         $Content = $data->Content ;
         $xml = <<<XML
-<xml><ToUserName><![CDATA[$ToUserName]]></ToUserName> 
-<FromUserName><![CDATA[$FromUserName]]></FromUserName> 
-<CreateTime>$CreateTime</CreateTime> 
-<MsgType><![CDATA[$msgType]]></MsgType> 
-<Content><![CDATA[$Content]]></Content></xml>
+<xml><ToUserName><![CDATA[$ToUserName]]></ToUserName><FromUserName><![CDATA[$FromUserName]]></FromUserName><CreateTime>$CreateTime</CreateTime><MsgType><![CDATA[$msgType]]></MsgType><Content><![CDATA[$Content]]></Content></xml>
 XML;
 
         Log::info($xml);
