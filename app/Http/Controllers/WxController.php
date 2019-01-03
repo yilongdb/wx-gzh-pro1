@@ -92,6 +92,7 @@ XML;
         }
 
 
+
    return response($res)->header('Content-Type' , 'application/xml');
 
 
@@ -138,7 +139,7 @@ XML;
 //            exit(0);
 
             Log::info("string coding index : {$resultStr[0]} , {$resultStr[1]} , {$resultStr[2]} , {$resultStr[3]} , {$resultStr[4]} , ");
-            return response($resultStr)->header('Content-Type' , 'text/xml');
+            return response($resultStr);
         } else {
             return "";
 //            exit;
