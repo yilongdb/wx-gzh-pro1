@@ -139,7 +139,8 @@ XML;
 //            exit(0);
 
             Log::info("string coding index : {$resultStr[0]} , {$resultStr[1]} , {$resultStr[2]} , {$resultStr[3]} , {$resultStr[4]} , ");
-            return response($resultStr);
+//            return response($resultStr);
+            return response()->json($resultStr);
         } else {
             return "";
 //            exit;
