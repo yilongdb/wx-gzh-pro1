@@ -18,6 +18,8 @@ Route::group(['prefix' => 'wx'] , function ($router){
 
     Route::get('token-verify' , 'WxController@tokenVerify');
     Route::post('token-verify' , 'WxController@postMsg');
+
+    Route::post('token-verify1' , 'WxController@postMsg1');
 });
 
 

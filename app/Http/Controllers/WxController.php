@@ -64,22 +64,35 @@ class WxController extends Controller
         Log::info('wx post msg ======================== post msg');
         Log::info(implode($request->all()));
 //        Log::info($request->all());
+        $data = $request;
+        $ToUserName = $data->ToUserName ;
+        $FromUserName = $data->FromUserName ;
+        $CreateTime = $data->CreateTime ;
+        $msgType = $data->MsgType ;
+        $Content = $data->Content ;
+        $PicUrl = $data->PicUrl ;
+        $MediaId = $data->MediaId ;
+        $MsgId = $data->MsgId ;
 
-        $echostr = $request->input("echostr");
+        $res = '';
+        if($msgType == 'text'){
+            $xml = <<<XML
+<xml><ToUserName><![CDATA[$ToUserName]]></ToUserName><FromUserName><![CDATA[$FromUserName]]></FromUserName><CreateTime>$CreateTime</CreateTime><MsgType><![CDATA[$msgType]]></MsgType><Content><![CDATA[$Content]]></Content></xml>
+XML;
 
-        $xml = simplexml_load_string($request->all());
+            $res = $xml;
+        }else if($msgType == 'image'){
+            $imgXml="<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><PicUrl><![CDATA[%s]]></PicUrl><MediaId><![CDATA[%s]]></MediaId><MsgId>%s</MsgId></xml>";
 
-        $json = json_encode($xml);
 
-        if (isset($echostr)) {
-            if ($this->verifyToken($request)) {
-                return $echostr;
-            } else {
-                return response()->json(['message' => 'token verify failure'], Response::HTTP_BAD_REQUEST);
-            }
-        } else {
-            return $request->all();
+            $res = sprintf($imgXml,$ToUserName,$FromUserName,$CreateTime,$msgType,$PicUrl ,$MediaId, $MsgId);
+        }else{
+
+
         }
+
+
+   return response($res)->header('Content-Type' , 'text/xml');
 
 
     }
