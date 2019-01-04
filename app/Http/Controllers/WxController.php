@@ -144,9 +144,9 @@ XML;
                 case "image":
                     $resultStr = $this->receive($postObj , $RX_TYPE);
                     break;
-                case "voice":
-                    $resultStr = $this->receive($postObj , $RX_TYPE);
-                    break;
+//                case "voice":
+//                    $resultStr = $this->receive($postObj , $RX_TYPE);
+//                    break;
                 case "event":
                     $resultStr = $this->receive($postObj , $RX_TYPE);
                     break;
@@ -162,8 +162,11 @@ XML;
 //            return response($resultStr);
 //            return response($resultStr);
 //            return $resultStr;
-            return response("".$resultStr, 200)
-                ->header('Content-Type', 'text/xml');
+//            return response("".$resultStr, 200)
+//                ->header('Content-Type', 'text/xml');
+
+
+            return "".$resultStr;
         } else {
             return "";
 //            exit;
