@@ -116,12 +116,12 @@ XML;
     public function postMsg(Request $request)
     {
 
-        $token = \Redis::get('access_token');
-        $ex = \Redis::get('expires_in');
-
-        if($ex){
-            Log::info("token : {$token} , ex : {$ex}");
-        }
+//        $token = \Redis::get('access_token');
+//        $ex = \Redis::get('expires_in');
+//
+//        if($ex){
+//            Log::info("token : {$token} , ex : {$ex}");
+//        }
         $postStr = $request->getContent();
         $resultStr = '';
         Log::info("post msg ========== postStr");
