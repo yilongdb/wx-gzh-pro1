@@ -161,7 +161,9 @@ XML;
             Log::info("string coding index : {$resultStr[0]} , {$resultStr[1]} , {$resultStr[2]} , {$resultStr[3]} , {$resultStr[4]} , ");
 //            return response($resultStr);
 //            return response($resultStr);
-            return $resultStr;
+//            return $resultStr;
+            return response($resultStr, 200)
+                ->header('Content-Type', 'text/xml');
         } else {
             return "";
 //            exit;
