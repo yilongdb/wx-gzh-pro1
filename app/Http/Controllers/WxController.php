@@ -162,7 +162,7 @@ XML;
 //            return response($resultStr);
 //            return response($resultStr);
 //            return $resultStr;
-            return response($resultStr, 200)
+            return response("".$resultStr, 200)
                 ->header('Content-Type', 'text/xml');
         } else {
             return "";
