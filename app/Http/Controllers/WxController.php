@@ -28,8 +28,7 @@ class WxController extends Controller
     {
         $echostr = $request->input("echostr");
 
-        Log:
-        info('wx verify msg ========================');
+        Log:info('wx verify msg ========================');
         Log::info(implode($request->all()));
 
         if ($this->verifyToken($request)) {
@@ -159,7 +158,8 @@ XML;
 
             Log::info("string coding index : {$resultStr[0]} , {$resultStr[1]} , {$resultStr[2]} , {$resultStr[3]} , {$resultStr[4]} , ");
 //            return response($resultStr);
-            return response()->json($resultStr);
+//            return response($resultStr);
+            return $resultStr;
         } else {
             return "";
 //            exit;
