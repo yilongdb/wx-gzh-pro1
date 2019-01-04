@@ -166,7 +166,7 @@ XML;
 //                ->header('Content-Type', 'text/xml');
 
 
-            return "".$resultStr;
+            return null;
         } else {
             return "";
 //            exit;
