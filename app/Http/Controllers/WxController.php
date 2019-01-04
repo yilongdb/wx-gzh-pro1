@@ -65,8 +65,10 @@ class WxController extends Controller
         Log::info(implode($request->all()));
 //        Log::info($request->all());
         $data = $request;
-        $ToUserName = $data->ToUserName ;
-        $FromUserName = $data->FromUserName ;
+//        $ToUserName = $data->ToUserName ;
+//        $FromUserName = $data->FromUserName ;
+        $FromUserName = $data->ToUserName ;
+        $ToUserName = $data->FromUserName ;
         $CreateTime = $data->CreateTime ;
         $msgType = $data->MsgType ;
         $Content = $data->Content ;
@@ -77,15 +79,15 @@ class WxController extends Controller
         $res = '';
         if($msgType == 'text'){
             $xml = <<<XML
-<xml><ToUserName><![CDATA[$ToUserName]]></ToUserName><FromUserName><![CDATA[$FromUserName]]></FromUserName><CreateTime>$CreateTime</CreateTime><MsgType><![CDATA[$msgType]]></MsgType><Content><![CDATA[$Content]]></Content></xml>
+<xml><ToUserName><![CDATA[$ToUserName]]></ToUserName><FromUserName><![CDATA[$FromUserName]]></FromUserName><CreateTime>$CreateTime</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[$Content]]></Content></xml>
 XML;
 
             $res = $xml;
         }else if($msgType == 'image'){
-            $imgXml="<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><PicUrl><![CDATA[%s]]></PicUrl><MediaId><![CDATA[%s]]></MediaId><MsgId>%s</MsgId></xml>";
+            $imgXml="<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[image]]></MsgType><Image><MediaId><![CDATA[%s]]></MediaId></Image></xml>";
 
 
-            $res = sprintf($imgXml,$ToUserName,$FromUserName,$CreateTime,$msgType,$PicUrl ,$MediaId, $MsgId);
+            $res = sprintf($imgXml,$ToUserName,$FromUserName,$CreateTime,$MediaId);
         }else{
 
 
