@@ -19,7 +19,9 @@ class WxController extends Controller
         sort($list);
         $hash = sha1(implode($list));
 
-
+//        Log::info(var_dump($request->all()));
+        Log::info('signature : '.$signature." , timestamp ".$timestamp." , nonce ".$nonce." , echostr ".$echostr );
+        Log::info('hash : '.$hash." , sign ".$signature." , eql : ". $hash == $signature);
         return $hash == $signature;
 
     }
