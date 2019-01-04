@@ -12,9 +12,9 @@
 */
 
 
-//Route::group(['prefix' => 'api'] , function ($router){
-//
-////    Route::get('/wx','token-verify' , 'WxController@tokenVerify');
-////    Route::post('/wx','token-verify' , 'WxController@postMsg');
-////    Route::post('/wx','token-verify1' , 'WxController@postMsg1');
-//});
+Route::group(['prefix' => 'api'] , function ($router){
+
+    Route::get('/wx','token-verify' , 'WxController@tokenVerify');
+    Route::post('/wx','token-verify' , 'WxController@postMsg');
+    Route::post('/wx','token-verify1' , 'WxController@postMsg1');
+});
